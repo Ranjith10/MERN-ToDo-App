@@ -1,6 +1,7 @@
 import React, { useReducer, useState } from "react";
 
 import "./Todo.css";
+import TodoList from "./TodoList";
 
 const todoReducer = (state, action) => {
   switch (action) {
@@ -38,6 +39,7 @@ const Todo = props => {
           onChange={e => setTodoValue(e.target.value)}
         />
       </form>
+      {todoList.length > 0 && <TodoList todoList={todoList} />}
     </>
   );
 };
