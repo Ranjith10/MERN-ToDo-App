@@ -1,33 +1,24 @@
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 
 import "./Todo.css";
 import TodoList from "./TodoList";
 
-const todoReducer = (state, action) => {
-  switch (action) {
-    case "add":
-      return { todoList: [...state.todoList, ...state.interimTodo] };
-    default:
-      throw new Error();
-  }
-};
-
 const Todo = props => {
-  const initialValue = { todoList: [] };
-
   const [todoValue, setTodoValue] = useState("");
-  const [todoList, setTodoList] = useReducer(todoReducer, initialValue);
-  const [interimTodo, setInterimTodo] = useState([]);
+  const [todoList, setTodoList] = useState([]);
 
   const handleOnSubmit = e => {
     //form submit by default reloads page on submit
     //stop the default behavior
     e.preventDefault();
-    let todoValue = [];
-    todoValue.push(e.target.value);
+    let todoValue = {
+      todoItem: e.target[0].value,
+      isActive: true
+    };
     setTodoValue("");
-    setInterimTodo(todoValue);
-    setTodoList("add");
+    let listTodo = todoList;
+    listTodo.push(todoValue);
+    setTodoList(listTodo);
   };
   return (
     <>
