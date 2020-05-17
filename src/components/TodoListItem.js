@@ -2,7 +2,8 @@ import React from "react";
 
 const TodoListItem = props => {
   const { todo } = props;
-  return <div className="todo-list-item">{todo}</div>;
+  console.log({ todo });
+  return <div className="todo-list-item">{todo.todo}</div>;
 };
 
 export default TodoListItem;
