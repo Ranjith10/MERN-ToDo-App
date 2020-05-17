@@ -11,26 +11,28 @@ const Todo = props => {
     //form submit by default reloads page on submit
     //stop the default behavior
     e.preventDefault();
+    let todoItem = e.target[0].value;
     let todoValue = {
-      todoItem: e.target[0].value,
+      todoItem,
       isActive: true
     };
     setTodoValue("");
-    let listTodo = todoList;
-    listTodo.push(todoValue);
+    let listTodo = [...todoList, todoValue];
     setTodoList(listTodo);
   };
   return (
     <>
-      <form onSubmit={handleOnSubmit}>
-        <input
-          className="todo-input-box"
-          placeholder="What needs to be done ?"
-          value={todoValue}
-          onChange={e => setTodoValue(e.target.value)}
-        />
-      </form>
-      {todoList.length > 0 && <TodoList todoList={todoList} />}
+      <div className="todo-container">
+        <form onSubmit={handleOnSubmit}>
+          <input
+            className="todo-input-box"
+            placeholder="What needs to be done ?"
+            value={todoValue}
+            onChange={e => setTodoValue(e.target.value)}
+          />
+        </form>
+        {todoList.length > 0 && <TodoList todoList={todoList} />}
+      </div>
     </>
   );
 };

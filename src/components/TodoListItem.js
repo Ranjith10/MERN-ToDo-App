@@ -1,9 +1,10 @@
 import React from "react";
 
+import "./TodoListItem.css";
+
 const TodoListItem = props => {
   const { todo } = props;
-  console.log({ todo });
-  return <div className="todo-list-item">{todo.todo}</div>;
+  return <div className="todo-list-item">{todo.todoItem}</div>;
 };
 
 export default TodoListItem;

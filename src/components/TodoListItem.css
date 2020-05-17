@@ -1,0 +1,9 @@
+.todo-list-item {
+  display: flex;
+  width: calc(100% - 60px);
+  padding: 10px 10px 10px 50px;
+  height: 50px;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid #ededed;
+}
