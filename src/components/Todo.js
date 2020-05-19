@@ -2,10 +2,12 @@ import React, { useState } from "react";
 
 import "./Todo.css";
 import TodoList from "./TodoList";
+import TodoFooter from "./TodoFooter";
 
 const Todo = props => {
   const [todoValue, setTodoValue] = useState("");
   const [todoList, setTodoList] = useState([]);
+  const [todoFilter, setTodoFilter] = useState("All");
 
   const handleOnSubmit = e => {
     //form submit by default reloads page on submit
@@ -20,6 +22,11 @@ const Todo = props => {
     let listTodo = [...todoList, todoValue];
     setTodoList(listTodo);
   };
+
+  const handleFilter = filterValue => {
+    setTodoFilter(filterValue);
+  };
+
   return (
     <>
       <div className="todo-container">
@@ -32,15 +39,9 @@ const Todo = props => {
           />
         </form>
         {todoList.length > 0 && <TodoList todoList={todoList} />}
-        <div className="todo-container-footer">
-          <div className="todo-items-msg">1 items left</div>
-          <div className="todo-status-container">
-            <div>All</div>
-            <div>Active</div>
-            <div>Completed</div>
-          </div>
-          <div className="todo-clear-container">Clear completed</div>
-        </div>
+        {todoList.length > 0 && (
+          <TodoFooter todoFilter={todoFilter} handleFilter={handleFilter} />
+        )}
       </div>
     </>
   );
