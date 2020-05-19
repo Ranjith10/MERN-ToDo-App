@@ -32,6 +32,15 @@ const Todo = props => {
           />
         </form>
         {todoList.length > 0 && <TodoList todoList={todoList} />}
+        <div className="todo-container-footer">
+          <div className="todo-items-msg">1 items left</div>
+          <div className="todo-status-container">
+            <div>All</div>
+            <div>Active</div>
+            <div>Completed</div>
+          </div>
+          <div className="todo-clear-container">Clear completed</div>
+        </div>
       </div>
     </>
   );
