@@ -10,7 +10,7 @@
 .todo-item-task {
   display: flex;
   justify-content: flex-start;
-  width: calc(100% - 50px);
+  width: calc(100% - 100px);
   margin-left: 10px;
 }
 .todo-done-toggle {
@@ -56,13 +56,11 @@
 }
 .todo-delete-icon {
   display: none;
-  height: 15px;
-  width: 15px;
   color: palevioletred;
   font-weight: 600;
-  font-size: 15px;
   cursor: pointer;
+  width: 50px;
 }
-.todo-list-item:hover .todo-delete-icon {
+.todo-list-item:hover > .todo-delete-icon {
   display: flex;
 }

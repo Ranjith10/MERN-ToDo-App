@@ -15,10 +15,10 @@ const TodoFilter = props => {
 };
 
 const TodoFooter = props => {
-  const { todoFilter, handleFilter } = props;
+  const { todoFilter, handleFilter, todoList } = props;
   return (
     <div className="todo-container-footer">
-      <div className="todo-items-msg">1 items left</div>
+      <div className="todo-items-msg">{todoList.length} items left</div>
       <div className="todo-status-container">
         {["All", "Active", "Completed"].map((filter, index) => {
           return (
