@@ -12,6 +12,7 @@ const TodoListItem = props => {
           <label htmlFor={`checkbox${index}`} />
         </div>
         <div className="todo-item-task">{todo.todoItem}</div>
+        <div className="todo-delete-icon"> X </div>
       </div>
     </>
   );
