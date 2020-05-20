@@ -19,7 +19,7 @@ const Todo = props => {
       isActive: true
     };
     setTodoValue("");
-    let listTodo = [...todoList, todoValue];
+    let listTodo = [todoValue, ...todoList];
     setTodoList(listTodo);
   };
 
@@ -40,7 +40,11 @@ const Todo = props => {
         </form>
         {todoList.length > 0 && <TodoList todoList={todoList} />}
         {todoList.length > 0 && (
-          <TodoFooter todoFilter={todoFilter} handleFilter={handleFilter} />
+          <TodoFooter
+            todoFilter={todoFilter}
+            handleFilter={handleFilter}
+            todoList={todoList}
+          />
         )}
       </div>
     </>
