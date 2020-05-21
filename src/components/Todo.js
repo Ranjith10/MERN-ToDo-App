@@ -17,7 +17,13 @@ const todoListReducer = (state, action) => {
       return [addedTodo, ...state];
     }
     case "complete-todo": {
-      return state;
+      let modifiedTodo = state.map(todo => {
+        if (todo.id === action.id) {
+          todo.active = !todo.active;
+        }
+        return todo;
+      });
+      return modifiedTodo;
     }
     case "delete-todo": {
       let filteredTodo = state.filter(todo => todo.id !== action.id);

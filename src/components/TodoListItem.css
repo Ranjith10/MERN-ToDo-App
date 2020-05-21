@@ -64,3 +64,7 @@
 .todo-list-item:hover > .todo-delete-icon {
   display: flex;
 }
+.todo-item-task.completed {
+  text-decoration: line-through;
+  color: #d9d9d9;
+}

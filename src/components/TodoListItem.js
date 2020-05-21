@@ -12,14 +12,31 @@ const TodoListItem = props => {
     });
   };
 
+  const handleCompleteTodo = index => {
+    todoListDispatch({
+      type: "complete-todo",
+      id: index
+    });
+  };
+
   return (
     <>
       <div className="todo-list-item">
         <div className="todo-done-toggle">
-          <input type="checkbox" id={`checkbox${index}`} />
+          <input
+            type="checkbox"
+            onClick={() => handleCompleteTodo(index)}
+            id={`checkbox${index}`}
+          />
           <label htmlFor={`checkbox${index}`} />
         </div>
-        <div className="todo-item-task">{todo.todoItem}</div>
+        <div
+          className={
+            todo.active ? "todo-item-task" : "todo-item-task completed"
+          }
+        >
+          {todo.todoItem}
+        </div>
         <div
           className="todo-delete-icon"
           onClick={() => handleRemoveTodo(index)}
