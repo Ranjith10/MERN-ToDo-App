@@ -1,12 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 
 import "./Todo.css";
 import TodoList from "./TodoList";
 import TodoFooter from "./TodoFooter";
 
+const todoListReducer = (state, action) => {
+  switch (action.type) {
+    case "add-todo": {
+      let addedTodo = {
+        id: state.length,
+        todoItem: action.item,
+        active: true
+      };
+      return [addedTodo, ...state];
+    }
+    default: {
+      return state;
+    }
+  }
+};
+
+const initialValue = [];
+
 const Todo = props => {
   const [todoValue, setTodoValue] = useState("");
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, todoListDispatch] = useReducer(
+    todoListReducer,
+    initialValue
+  );
   const [todoFilter, setTodoFilter] = useState("All");
 
   const handleOnSubmit = e => {
@@ -14,13 +35,11 @@ const Todo = props => {
     //stop the default behavior
     e.preventDefault();
     let todoItem = e.target[0].value;
-    let todoValue = {
-      todoItem,
-      isActive: true
-    };
     setTodoValue("");
-    let listTodo = [todoValue, ...todoList];
-    setTodoList(listTodo);
+    todoListDispatch({
+      type: "add-todo",
+      item: todoItem
+    });
   };
 
   const handleFilter = filterValue => {
