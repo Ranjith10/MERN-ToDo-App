@@ -4,15 +4,24 @@ import "./Todo.css";
 import TodoList from "./TodoList";
 import TodoFooter from "./TodoFooter";
 
+let nextId = 0;
+
 const todoListReducer = (state, action) => {
   switch (action.type) {
     case "add-todo": {
       let addedTodo = {
-        id: state.length,
+        id: nextId++,
         todoItem: action.item,
         active: true
       };
       return [addedTodo, ...state];
+    }
+    case "complete-todo": {
+      return state;
+    }
+    case "delete-todo": {
+      let filteredTodo = state.filter(todo => todo.id !== action.id);
+      return filteredTodo;
     }
     default: {
       return state;
@@ -57,7 +66,9 @@ const Todo = props => {
             onChange={e => setTodoValue(e.target.value)}
           />
         </form>
-        {todoList.length > 0 && <TodoList todoList={todoList} />}
+        {todoList.length > 0 && (
+          <TodoList todoList={todoList} todoListDispatch={todoListDispatch} />
+        )}
         {todoList.length > 0 && (
           <TodoFooter
             todoFilter={todoFilter}
