@@ -15,12 +15,19 @@ const TodoFilter = props => {
 };
 
 const TodoFooter = props => {
-  const { todoFilter, handleFilter, todoList } = props;
+  const { todoFilter, handleFilter, todoList, todoListDispatch } = props;
 
   const todoItemsActive = todoList.filter(todo => todo.active === true).length;
   const msg = todoItemsActive === 1 ? "item left" : "items left";
   const clearCompletedMsg =
     todoList.filter(todo => todo.active !== true).length > 0;
+
+  const handleClearCompleted = () => {
+    todoListDispatch({
+      type: "clear-completed-todo"
+    });
+  };
+
   return (
     <div className="todo-container-footer">
       <div className="todo-items-msg">
@@ -39,7 +46,9 @@ const TodoFooter = props => {
         })}
       </div>
       {clearCompletedMsg ? (
-        <div className="todo-clear-container">Clear completed</div>
+        <div className="todo-clear-container" onClick={handleClearCompleted}>
+          Clear completed
+        </div>
       ) : (
         <div className="todo-clear-container" />
       )}

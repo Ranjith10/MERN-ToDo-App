@@ -29,6 +29,10 @@ const todoListReducer = (state, action) => {
       let filteredTodo = state.filter(todo => todo.id !== action.id);
       return filteredTodo;
     }
+    case "clear-completed-todo": {
+      let filteredTodo = state.filter(todo => todo.active === true);
+      return filteredTodo;
+    }
     default: {
       return state;
     }
@@ -80,6 +84,7 @@ const Todo = props => {
             todoFilter={todoFilter}
             handleFilter={handleFilter}
             todoList={todoList}
+            todoListDispatch={todoListDispatch}
           />
         )}
       </div>
