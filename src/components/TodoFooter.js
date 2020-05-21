@@ -16,9 +16,16 @@ const TodoFilter = props => {
 
 const TodoFooter = props => {
   const { todoFilter, handleFilter, todoList } = props;
+
+  const todoItemsActive = todoList.filter(todo => todo.active === true).length;
+  const msg = todoItemsActive === 1 ? "item left" : "items left";
+  const clearCompletedMsg =
+    todoList.filter(todo => todo.active !== true).length > 0;
   return (
     <div className="todo-container-footer">
-      <div className="todo-items-msg">{todoList.length} items left</div>
+      <div className="todo-items-msg">
+        {todoItemsActive} {msg}
+      </div>
       <div className="todo-status-container">
         {["All", "Active", "Completed"].map((filter, index) => {
           return (
@@ -31,7 +38,11 @@ const TodoFooter = props => {
           );
         })}
       </div>
-      <div className="todo-clear-container">Clear completed</div>
+      {clearCompletedMsg ? (
+        <div className="todo-clear-container">Clear completed</div>
+      ) : (
+        <div className="todo-clear-container" />
+      )}
     </div>
   );
 };

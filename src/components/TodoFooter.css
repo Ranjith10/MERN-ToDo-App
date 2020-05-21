@@ -21,8 +21,13 @@
 }
 .todo-clear-container {
   cursor: pointer;
+  justify-content: flex-end;
 }
 .todo-status-container > div.active {
   padding: 5px;
   border: 1px solid rgba(175, 47, 47, 0.2);
+}
+.todo-container-footer > div {
+  width: 33.33%;
+  display: flex;
 }
