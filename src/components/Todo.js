@@ -77,7 +77,16 @@ const Todo = props => {
           />
         </form>
         {todoList.length > 0 && (
-          <TodoList todoList={todoList} todoListDispatch={todoListDispatch} />
+          <TodoList
+            todoList={
+              todoFilter === "All"
+                ? todoList
+                : todoFilter === "Active"
+                ? todoList.filter(todo => todo.active === true)
+                : todoList.filter(todo => todo.active !== true)
+            }
+            todoListDispatch={todoListDispatch}
+          />
         )}
         {todoList.length > 0 && (
           <TodoFooter
