@@ -25,8 +25,9 @@ const TodoListItem = props => {
         <div className="todo-done-toggle">
           <input
             type="checkbox"
-            onClick={() => handleCompleteTodo(index)}
+            onChange={() => handleCompleteTodo(index)}
             id={`checkbox${index}`}
+            checked={!todo.active}
           />
           <label htmlFor={`checkbox${index}`} />
         </div>
