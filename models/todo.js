@@ -3,9 +3,11 @@ const Schema = mongoose.Schema
 
 //Create schema
 const TodoSchema = new Schema({
+  action: {
     type: String,
-    action: [true, 'Todo text field is mandatory']
-}) 
+    required: [true, 'The todo text field is required']
+  }
+})
 
 //Create model 
 const Todo = mongoose.model('todo', TodoSchema)
