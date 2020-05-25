@@ -30,14 +30,15 @@ router.post('/todos', (req, res) => {
 })
 
 router.delete('/todos/:id', (req, res) => {
-    console.log(req.params)
     Todo.findOneAndDelete({"_id": req.params.id})
         .then(data => res.json(data))
         .catch(err => console.log('err', err))
 })
 
-router.put('/todos:id', (req, res) => {
-
+router.put('/todos/:id', (req, res) => {
+    Todo.findByIdAndUpdate({"_id": req.params.id}, req.body, {new: true})
+        .then(data => res.json(data))
+        .catch(err => console.log("Err", err))
 })
 
 module.exports = router
