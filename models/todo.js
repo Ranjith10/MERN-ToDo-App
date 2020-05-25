@@ -3,9 +3,13 @@ const Schema = mongoose.Schema
 
 //Create schema
 const TodoSchema = new Schema({
-  action: {
+  todoItem: {
     type: String,
     required: [true, 'The todo text field is required']
+  },
+  active: {
+    type: Boolean,
+    default: true,
   }
 })
 

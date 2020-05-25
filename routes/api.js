@@ -3,8 +3,12 @@ const router = express.Router()
 
 const Todo = require('../models/todo')
 
+router.get('/', (req, res) => {
+    console.log("In root")
+})
+
 router.get('/todos', (req, res) => {
-    Todo.find({}, 'action')
+    Todo.todo.find({}, 'action')
         .then(data => res.json(data))
 })
 
