@@ -1,15 +1,28 @@
 import React from "react";
 
+import {getTodos, deleteTodo} from "../service/FetchData";
 import "./TodoListItem.css";
 
 const TodoListItem = props => {
   const { todo, index, todoListDispatch } = props;
 
   const handleRemoveTodo = index => {
-    todoListDispatch({
-      type: "delete-todo",
-      id: index
-    });
+    deleteTodo(index)
+    .then(result => {
+      if(result.status === 200) {
+        console.log("in")
+        getTodos()
+          .then(result => {
+            console.log(result.data)
+            todoListDispatch({
+              type: "fetch-list-todos",
+              todoList: result.data
+            })
+          })
+          .catch(err => console.log('err', err))
+      }
+    })
+    
   };
 
   const handleCompleteTodo = index => {

@@ -4,8 +4,7 @@ import axios from "axios";
 import "./Todo.css";
 import TodoList from "./TodoList";
 import TodoFooter from "./TodoFooter";
-
-let nextId = 0;
+import { getTodos} from "../service/FetchData";
 
 const todoListReducer = (state, action) => {
   switch (action.type) {
@@ -50,13 +49,7 @@ const Todo = props => {
 
   //didMount equivalent 
   useEffect(() =>{
-    axios("/api/todos", {
-      method: "GET",
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-      }
-    })
+    getTodos()
     .then(result => {
       todoListDispatch({
         type: "fetch-list-todos",
