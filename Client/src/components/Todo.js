@@ -1,4 +1,5 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
+import axios from "axios";
 
 import "./Todo.css";
 import TodoList from "./TodoList";
@@ -8,6 +9,9 @@ let nextId = 0;
 
 const todoListReducer = (state, action) => {
   switch (action.type) {
+    case "fetch-list-todos": {
+      return action.todoList
+    }
     case "add-todo": {
       let addedTodo = {
         id: nextId++,
@@ -48,6 +52,23 @@ const Todo = props => {
     initialValue
   );
   const [todoFilter, setTodoFilter] = useState("All");
+
+  //didMount equivalent 
+  useEffect(() =>{
+    axios.get("/api/todos", {
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      }
+    })
+    .then(result => {
+      todoListDispatch({
+        type: "fetch-list-todos",
+        todoList: result.data
+      })
+    })
+    .catch(err => console.log('err', err))
+  },[])
 
   const handleOnSubmit = e => {
     //form submit by default reloads page on submit

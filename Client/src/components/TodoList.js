@@ -8,10 +8,11 @@ const TodoList = props => {
   return (
     <div className="todo-list-container">
       {todoList.map((todo, index) => {
+        {console.log(todo)}
         return (
           <TodoListItem
-            key={todo.id}
-            index={todo.id}
+            key={todo._id}
+            index={todo._id}
             todo={todo}
             todoListDispatch={todoListDispatch}
           />
