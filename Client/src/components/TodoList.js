@@ -8,7 +8,6 @@ const TodoList = props => {
   return (
     <div className="todo-list-container">
       {todoList.map((todo, index) => {
-        {console.log(todo)}
         return (
           <TodoListItem
             key={todo._id}

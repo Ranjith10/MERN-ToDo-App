@@ -13,12 +13,7 @@ const todoListReducer = (state, action) => {
       return action.todoList
     }
     case "add-todo": {
-      let addedTodo = {
-        id: nextId++,
-        todoItem: action.item,
-        active: true
-      };
-      return [addedTodo, ...state];
+      return [action.todoItem, ...state];
     }
     case "complete-todo": {
       let modifiedTodo = state.map(todo => {
@@ -55,7 +50,8 @@ const Todo = props => {
 
   //didMount equivalent 
   useEffect(() =>{
-    axios.get("/api/todos", {
+    axios("/api/todos", {
+      method: "GET",
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
@@ -74,12 +70,28 @@ const Todo = props => {
     //form submit by default reloads page on submit
     //stop the default behavior
     e.preventDefault();
-    let todoItem = e.target[0].value;
+    let todoItem = {
+      todoItem: e.target[0].value,
+      active: true,
+    };
     setTodoValue("");
-    todoListDispatch({
-      type: "add-todo",
-      item: todoItem
-    });
+    
+    //POST call for adding new Todos
+    axios("/api/todos", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      data: todoItem
+    })
+    .then(result => {
+      todoListDispatch({
+        type: "add-todo",
+        todoItem: result.data
+      });
+    })
+    .catch(err => console.log("err", err))
   };
 
   const handleFilter = filterValue => {
