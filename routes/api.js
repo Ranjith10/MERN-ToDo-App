@@ -30,7 +30,7 @@ router.post('/todos', (req, res) => {
 })
 
 router.delete('/todos/:id', (req, res) => {
-    Todo.findOneAndDelete({"_id": req.params.id})
+    Todo.deleteMany({"_id": req.params.id.split(',')})
         .then(data => res.json(data))
         .catch(err => console.log('err', err))
 })

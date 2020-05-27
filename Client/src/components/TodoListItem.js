@@ -22,7 +22,6 @@ const TodoListItem = props => {
           .catch(err => console.log('err', err))
       }
     })
-    
   };
 
   const handleCompleteTodo = index => {

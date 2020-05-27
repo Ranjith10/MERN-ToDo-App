@@ -1,5 +1,6 @@
 import React from "react";
 
+import {deleteTodo} from "../service/FetchData";
 import "./TodoFooter.css";
 
 const TodoFilter = props => {

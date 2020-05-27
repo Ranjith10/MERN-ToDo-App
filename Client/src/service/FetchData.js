@@ -12,7 +12,18 @@ export const getTodos = () => {
 }
 
 export const deleteTodo = (id) => {
-    return axios(`/api/todos:${id}`, {
+    return axios(`/api/todos/${id}`, {
         method: "DELETE",
+    })
+}
+
+export const addTodo = (todoItem) => {
+    return axios("/api/todos", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        data: todoItem
     })
 }

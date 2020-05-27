@@ -1,10 +1,9 @@
 import React, { useState, useReducer, useEffect } from "react";
-import axios from "axios";
 
 import "./Todo.css";
 import TodoList from "./TodoList";
 import TodoFooter from "./TodoFooter";
-import { getTodos} from "../service/FetchData";
+import { getTodos, addTodo} from "../service/FetchData";
 
 const todoListReducer = (state, action) => {
   switch (action.type) {
@@ -16,7 +15,7 @@ const todoListReducer = (state, action) => {
     }
     case "complete-todo": {
       let modifiedTodo = state.map(todo => {
-        if (todo.id === action.id) {
+        if (todo._id === action.id) {
           todo.active = !todo.active;
         }
         return todo;
@@ -70,14 +69,7 @@ const Todo = props => {
     setTodoValue("");
     
     //POST call for adding new Todos
-    axios("/api/todos", {
-      method: "POST",
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-      },
-      data: todoItem
-    })
+    addTodo(todoItem)
     .then(result => {
       todoListDispatch({
         type: "add-todo",
