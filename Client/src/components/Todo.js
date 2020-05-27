@@ -22,10 +22,6 @@ const todoListReducer = (state, action) => {
       });
       return modifiedTodo;
     }
-    case "delete-todo": {
-      let filteredTodo = state.filter(todo => todo.id !== action.id);
-      return filteredTodo;
-    }
     case "clear-completed-todo": {
       let filteredTodo = state.filter(todo => todo.active === true);
       return filteredTodo;

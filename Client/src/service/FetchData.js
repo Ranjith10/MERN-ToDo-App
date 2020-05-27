@@ -27,3 +27,14 @@ export const addTodo = (todoItem) => {
         data: todoItem
     })
 }
+
+export const toggleActive = (todo) => {
+  return axios("/api/todos", {
+    method: "PUT",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+    },
+    data: todo
+  })
+}

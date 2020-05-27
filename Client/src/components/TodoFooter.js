@@ -1,6 +1,6 @@
 import React from "react";
 
-import {deleteTodo} from "../service/FetchData";
+import {deleteTodo, getTodos} from "../service/FetchData";
 import "./TodoFooter.css";
 
 const TodoFilter = props => {
@@ -24,9 +24,22 @@ const TodoFooter = props => {
     todoList.filter(todo => todo.active !== true).length > 0;
 
   const handleClearCompleted = () => {
-    todoListDispatch({
-      type: "clear-completed-todo"
-    });
+    let completedListIds = todoList.filter(todo => todo.active === false).map(item => item._id);
+    deleteTodo(completedListIds)
+    .then(result => {
+      if(result.status === 200) {
+        console.log("in")
+        getTodos()
+          .then(result => {
+            console.log(result.data)
+            todoListDispatch({
+              type: "fetch-list-todos",
+              todoList: result.data
+            })
+          })
+          .catch(err => console.log('err', err))
+      }
+    })  
   };
 
   return (
